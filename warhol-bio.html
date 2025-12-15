@@ -31,5 +31,31 @@
     </p>
 
     <p>Click <a href="index.html">here</a> to go back to the homepage.</p>
+
+    <hr>
+
+    <h2>API Demo (Fake JSON Endpoint)</h2>
+    <p>This section below is populated by fetching <code>data.json</code>.</p>
+
+    <h3 id="api-name">Loading...</h3>
+    <p id="api-details"></p>
+
+    <script>
+        fetch("data.json")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("api-name").textContent = data.name;
+                document.getElementById("api-details").textContent =
+                    data.name + " was born on " +
+                    data.born + " in " +
+                    data.birthplace +
+                    " and was a leading figure in " +
+                    data.movement + ".";
+            })
+            .catch(err => {
+                document.getElementById("api-name").textContent = "Failed to load data.json";
+                document.getElementById("api-details").textContent = String(err);
+            });
+    </script>
 </body>
 </html>
