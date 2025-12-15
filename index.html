@@ -13,7 +13,7 @@
     <p>Click here for more info: <a href="warhol-bio.html">Andy Warhol Biography</a></p>
 
     <script>
-fetch("https://porfl9hea4.execute-api.eu-north-1.amazonaws.com/prod")
+fetch("https://porfl9hea4.execute-api.eu-north-1.amazonaws.com/prod/")
   .then(res => res.json())
   .then(data => {
     document.body.innerHTML += "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
@@ -22,5 +22,6 @@ fetch("https://porfl9hea4.execute-api.eu-north-1.amazonaws.com/prod")
 
 </body>
 </html>
+
 
 
