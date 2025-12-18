@@ -21,8 +21,31 @@
         </a>
     </p>
 
-    <h2>Lots</h2>
-    <div id="lots"></div>
+    <h2>External Links</h2>
+
+    <ul>
+        <li>
+            <a
+                href="https://www.google.com/search?q=Andy+Warhol"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="Andy Warhol Google Search"
+            >
+                Andy Warhol on Google
+            </a>
+        </li>
+
+        <li>
+            <a
+                href="https://en.wikipedia.org/wiki/Andy_Warhol"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="Andy Warhol Wikipedia"
+            >
+                Andy Warhol on Wikipedia
+            </a>
+        </li>
+    </ul>
 
     <script>
         const TRACK_ENDPOINT =
@@ -40,47 +63,12 @@
             }).catch(() => {});
         }
 
-        document.addEventListener("click", e => {
-            const link = e.target.closest("a[data-track]");
+        document.addEventListener("click", event => {
+            const link = event.target.closest("a[data-track]");
             if (!link) return;
+
             trackClick(link.dataset.track, link.href);
         });
-
-        fetch("https://jawo8dkwpi.execute-api.eu-west-2.amazonaws.com/lots")
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById("lots");
-
-                data.forEach(lot => {
-                    const div = document.createElement("div");
-
-                    const searchUrl =
-                        "https://www.google.com/search?q=" +
-                        encodeURIComponent(lot.lotitle);
-
-                    div.innerHTML = `
-                        <h3>
-                            <a
-                                href="${searchUrl}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                data-track="${lot.lotitle}"
-                            >
-                                ${lot.lotitle}
-                            </a>
-                        </h3>
-                        <p>${lot.lotdescription}</p>
-                        <p><strong>Price:</strong> ${lot.priceresult} ${lot.currencycode}</p>
-                        <p><strong>Auction:</strong> ${lot.housename}</p>
-                        <hr>
-                    `;
-
-                    container.appendChild(div);
-                });
-            })
-            .catch(err => {
-                console.error(err);
-            });
     </script>
 
 </body>
